@@ -103,11 +103,11 @@ div#remote-media video {
   /*background-repeat: no-repeat;*/
 }
 
-div#controls {
-  padding: 3em;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/*div#controls {*/
+  /*padding: 3em;*/
+  /*max-width: 1200px;*/
+  /*margin: 0 auto;*/
+/*}*/
 
 div#controls div {
   /*float: left;*/

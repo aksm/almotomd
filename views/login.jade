@@ -9,35 +9,21 @@ block content
         br
         form(role='form', action="/login",method="post" )
           .input-field
-              input(type='text', name="username", placeholder='Enter Email', value="")
+              input.white-text(type='text', name="username", placeholder='Enter Email', value="")
           .input-field
-            input(type='password', name="password", placeholder='Password', value="")
-          button.btn.red.darken-4(type='submit') Login
+            input.white-text(type='password', name="password", placeholder='Password', value="")
+          button.btn.grey.darken-4(type='submit') Login
 
       .col.s12.m6
         h3.center Signup
         br
         form(role='form', action="/register",method="post" )
           .input-field
-            input(type='text', name="username", placeholder='Enter Rutgers Email', value="")
+            input.white-text(type='text', name="username", placeholder='Enter Email', value="")
           .input-field
-            input(type='text', name="phone", placeholder='Enter Phone Number', value="")
+            input.white-text(type='text', name="phone", placeholder='Enter Phone Number', value="")
           .input-field
-            input(type='password', name="password", placeholder='Password', value="")
-          h5 Are you a Student?
-          .switch
-            label
-              No
-              input.form-control(type='checkbox', name="student")
-              span.lever
-              Yes
+            input.white-text(type='password', name="password", placeholder='Password', value="")
+
           br
-          h5 Do you want to be a mentor?
-          .switch
-            label
-              No
-              input.form-control(type='checkbox', name="mentor")
-              span.lever
-              Yes
-          br
-          button.btn.red.darken-4(type='submit') Signup
+          button.btn.grey.darken-4(type='submit') Signup
