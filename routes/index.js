@@ -9,6 +9,7 @@ var passport = require('passport');
 var Account = require('../models/account');
 var randomUsername = require('../models/randos');
 
+var request = require('request');
 
 var router = express.Router();
 
@@ -52,6 +53,37 @@ router.get('/userlist/:user', function(req, res) {
     res.json(docs);
     console.log(docs);
   });
+});
+
+
+
+router.get('/getdoctors/', function(req, res) {
+
+  // Latitude: 40.7265486
+  // Longitude: -74.0074612
+  request(
+      { method: 'GET'
+        , uri: 'https://api.betterdoctor.com/2016-03-01/doctors?query=neuro%20surgery%20&location=40.7265486%2C-74.0074612%2C10&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=8800c209a89885a1afb0a793713df6cb'
+      }
+      , function (error, response, body) {
+        // body is the decompressed response body
+        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'))
+        console.log('the decoded data is: ' + body);
+        var data = JSON.parse(body);
+        res.json( data.data );
+      }
+  ).on('data', function(data) {
+    // decompressed data as it is received
+    console.log('decoded chunk: ' + data)
+  })
+      .on('response', function(response) {
+        // unmodified http.IncomingMessage object
+        response.on('data', function(data) {
+          // compressed data as it is received
+          console.log('received ' + data.length + ' bytes of compressed data')
+        })
+      });
+
 });
 
 
