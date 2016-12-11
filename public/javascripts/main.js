@@ -25,3 +25,6 @@ $.ajax({
 $(document).on('click','.click-to-call', function () {
     console.log($(this).attr('data-user'));
 });
+$(document).ready(function() {
+    $('select').material_select();
+});
