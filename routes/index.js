@@ -29,13 +29,31 @@ router.get('/settings', function(req, res) {
   res.render('setting', { });
 });
 
-router.get('/userlist', function(req, res) {
+router.get('/userlist/', function(req, res) {
   // res.render('userlist', { });
   Account.find({}, function (err, docs) {
     res.json(docs);
     // console.log(docs);
   });
 });
+
+router.get('/department/:department', function(req, res){
+  var department = req.params.department;
+  console.log(department);
+
+  Account.find({'department': department}, function(err, docs){
+    res.json(docs);
+  });
+})
+
+router.get('/userlist/:user', function(req, res) {
+  // res.render('userlist', { });
+  Account.find({ _id: req.params.user}, function (err, docs) {
+    res.json(docs);
+    console.log(docs);
+  });
+});
+
 
 router.get('/token', function(request, response) {
   //'user' = from passport
@@ -97,10 +115,6 @@ router.get('/ping', function(req, res){
   res.status(200).send("pong!");
 });
 
-//route for paging someone
-router.get('/page/:user', function(req, res) {
-  var lastname = req.params.user;
-  res.render('userlist', {lastname:lastname});
-});
+
 
 module.exports = router;
