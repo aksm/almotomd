@@ -82,13 +82,13 @@ router.get('/page/:user', function(req, res){
 });
 
 
-router.get('/getdoctors/', function(req, res) {
+router.get('/getdoctors/:department', function(req, res) {
 
   // Latitude: 40.7265486
   // Longitude: -74.0074612
   request(
       { method: 'GET'
-        , uri: 'https://api.betterdoctor.com/2016-03-01/doctors?query=neuro%20surgery%20&location=40.7265486%2C-74.0074612%2C10&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=8800c209a89885a1afb0a793713df6cb'
+        , uri: 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + req.params.department + '&location=40.7265486%2C-74.0074612%2C10&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=8800c209a89885a1afb0a793713df6cb'
       }
       , function (error, response, body) {
         // body is the decompressed response body
