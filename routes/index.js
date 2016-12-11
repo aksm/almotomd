@@ -51,10 +51,35 @@ router.get('/userlist/:user', function(req, res) {
   // res.render('userlist', { });
   Account.find({ _id: req.params.user}, function (err, docs) {
     res.json(docs);
-    console.log(docs);
+    console.log('user info:' + docs);
   });
 });
 
+
+var accountSid = 'AC5efaf6fcea5c2439ca7a6dbe16416b06';
+  var authToken = 'b692b27b1ae36bdf7c916f57df98259e';
+  //require the Twilio module and create a REST client
+  var client = require('twilio')(accountSid, authToken);
+
+router.get('/page/:user', function(req, res){
+  // Twilio Credentials
+  Account.find({ _id: req.params.user}, function (err, docs) {
+    res.json(docs);
+    console.log('user info:' + docs);
+
+    client.messages.create({
+    to: "+14129155281",
+    from: "+14122120376",
+    body: docs[0].firstname + " " + docs[0].lastname + " from " + docs[0].department + " says: Please call me.",
+
+    }, function(err, message) {
+      console.log(err);
+    });
+  });
+
+  
+
+});
 
 
 router.get('/getdoctors/', function(req, res) {
@@ -146,6 +171,8 @@ router.get('/logout', function(req, res) {
 router.get('/ping', function(req, res){
   res.status(200).send("pong!");
 });
+
+
 
 
 
