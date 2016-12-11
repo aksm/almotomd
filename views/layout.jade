@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/bower_components/materialize/dist/css/materialize.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  body.black
+
+  include templates/nav.html
+
+  block content
+
+
+
+  script(src='https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js')
+  script(src='https://media.twiliocdn.com/sdk/js/video/releases/1.0.0-beta2/twilio-video.js')
+
+  script(src='https://code.jquery.com/jquery.js')
+  script(src='/bower_components/materialize/dist/js/materialize.js')
+  script(src='/javascripts/main.js')
+  script(src='/javascripts/videochat.js')
+
+  script(src='/javascripts/typed.min.js')
+  script(src='/javascripts/type.js')
