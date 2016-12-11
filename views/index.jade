@@ -1,9 +1,9 @@
 extends layout
 
 block content
-     .container
+     .container.black.darken-4
 
-             .black.darken-4
+
 
 
                      if (!user)
@@ -25,9 +25,9 @@ block content
 
 
                      if (user)
-                             .container
-                                     .row
-                                        #remote-media
+                             .row
+
+                                     #remote-media
                                      #controls.row
                                              #preview.col.s12
                                                      #local-media
@@ -35,9 +35,9 @@ block content
                                      #room-controls.row
 
                                              input#room-name(type='hidden', value='hackru')
-                                             button#button-preview.btn.grey.btn-ghost.col.s12 Preview Cam
-                                             button#button-join.btn.btn-ghost.col.s12 Start Call
-                                             button#button-leave.btn.btn-ghost.col.s12(style='display: none;') End Call
+                                             button#button-preview.btn.grey.btn-ghost.col.s12.hide Preview Cam
+                                             button#button-join.btn.btn-ghost1.col.s12.green Start Call
+                                             button#button-leave.btn.btn-ghost1.col.s12.red(style='display: none;') End Call
 
                                      .row
                                              #log.hide

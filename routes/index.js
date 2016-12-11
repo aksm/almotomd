@@ -117,7 +117,8 @@ router.get('/getdoctors/:department', function(req, res) {
 
 router.get('/token', function(request, response) {
   //'user' = from passport
-  var identity = request.user.username;
+  // var identity = request.user.username;
+  var identity = randomUsername();
   console.log('identity: ' + identity);
 
   // var identity = 
