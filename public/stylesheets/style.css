@@ -150,6 +150,10 @@ div#controls button:active {
   /*position: relative;*/
   /*top: 1px;*/
 }
+.toast {
+  background-color: red;
+  text-transform: capitalize;
+}
 
 /*div#controls div#preview div#local-media {*/
   /*width: 270px;*/
@@ -161,7 +165,9 @@ div#controls button:active {
   /*background-repeat: no-repeat;*/
   /*margin: 0 auto;*/
 /*}*/
-
+.capitalize {
+  text-transform: capitalize;
+}
 div#controls div#preview div#local-media video {
   max-width: 100%;
   max-height: 100%;

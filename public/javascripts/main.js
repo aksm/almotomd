@@ -16,7 +16,7 @@ $.ajax({
 
         // console.log(key);
         // console.log(value);
-        $('#userlist').append('<li class="collection-item click-to-call white-text transparent" data-user="' + value.firstname + '" data-id="' + value._id + '"><div>' + value.lastname + ', ' + value.firstname + ': ' + value.department + '<a href="#!" class="secondary-content"><i class="material-icons white-text">chat</i></a></div></li>');
+        $('#userlist').append('<li class="collection-item click-to-call white-text transparent capitalize" data-user="' + value.firstname + ' ' + value.lastname + ' - ' + value.department + '" data-id="' + value._id + '"><div>' + value.lastname + ', ' + value.firstname + ' <br>' + value.department + '<a href="#!" class="secondary-content"><i class="material-icons white-text">chat</i></a></div></li>');
 
     });
 
@@ -29,7 +29,7 @@ $(document).on('click','.click-to-call', function () {
     var URL = currentUrl + '/page/' + id
     $.get(URL, function(data){
     	// console.log('success');
-    	Materialize.toast('Message sent to ' + user, 4000);
+    	Materialize.toast('Paging: ' + user, 14000);
     });
 
 
