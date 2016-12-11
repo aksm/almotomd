@@ -13,14 +13,7 @@ var request = require('request');
 
 var router = express.Router();
 
-/* At the top, with other redirect methods before other routes */
-router.get('*',function(req,res,next){
-  if(req.headers['x-forwarded-proto']!='https')
-    res.redirect('https://mypreferreddomain.com'+req.url);
-  else
-    next(); /* Continue to other routes if we're not redirecting */
-});
-
+ 
 
 router.get('/', function (req, res) {
   res.render('index', { user : req.user });
