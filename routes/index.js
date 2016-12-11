@@ -23,7 +23,6 @@ router.get('/register', function(req, res) {
 
 router.get('/search', function(req, res) {
   res.render('userlist', { });
-
 });
 
 router.get('/settings', function(req, res) {
@@ -32,18 +31,19 @@ router.get('/settings', function(req, res) {
 
 router.get('/userlist', function(req, res) {
   // res.render('userlist', { });
-
   Account.find({}, function (err, docs) {
     res.json(docs);
     // console.log(docs);
   });
-
 });
 
 router.get('/token', function(request, response) {
-  // var identity = request.user.username;
+  //'user' = from passport
+  var identity = request.user.username;
+  console.log('identity: ' + identity);
 
-  var identity = randomUsername();
+  // var identity = 
+
   // Create an access token which we will sign and return to the client,
   // containing the grant we just created
   var token = new AccessToken(
@@ -68,8 +68,9 @@ router.get('/token', function(request, response) {
 });
 
 router.post('/register', function(req, res) {
-  Account.register(new Account({ lastname : req.body.lastname , firstname : req.body.firstname , department : req.body.department, phone:req.body.phone, email:req.body.email }), req.body.password, function(err, account) {
+  Account.register(new Account({ lastname : req.body.lastname, firstname : req.body.firstname, department : req.body.department, phone:req.body.phone, username:req.body.email }), req.body.password, function(err, account) {
     if (err) {
+      console.log(err);
       return res.render('register', { account : account });
     }
 
@@ -94,6 +95,12 @@ router.get('/logout', function(req, res) {
 
 router.get('/ping', function(req, res){
   res.status(200).send("pong!");
+});
+
+//route for paging someone
+router.get('/page/:user', function(req, res) {
+  var lastname = req.params.user;
+  res.render('userlist', {lastname:lastname});
 });
 
 module.exports = router;
