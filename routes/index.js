@@ -68,7 +68,7 @@ router.get('/page/:user', function(req, res){
     console.log('user info:' + docs);
 
     client.messages.create({
-    to: "+14129155281",
+    to: "+18473416432",
     from: "+14122120376",
     body: docs[0].firstname + " " + docs[0].lastname + " from " + docs[0].department + " says: Please call me.",
 
@@ -159,8 +159,32 @@ router.get('/login', function(req, res) {
   res.render('login', { user : req.user });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/');
+// router.post('/login', passport.authenticate('local'), function(req, res) {
+//   res.redirect('/');
+// });
+
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (! user) {
+      return res.send({ success : false, message : 'authentication failed' });
+    }
+    // ***********************************************************************
+    // "Note that when using a custom callback, it becomes the application's
+    // responsibility to establish a session (by calling req.login()) and send
+    // a response."
+    // Source: http://passportjs.org/docs
+    // ***********************************************************************
+    req.login(user, loginErr => {
+      if (loginErr) {
+        return next(loginErr);
+      }
+      return res.redirect('/');
+    });      
+  })(req, res, next);
 });
 
 router.get('/logout', function(req, res) {

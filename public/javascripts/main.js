@@ -16,14 +16,21 @@ $.ajax({
 
         // console.log(key);
         // console.log(value);
-        $('#userlist').append('<li class="collection-item click-to-call white-text transparent" data-user="' + value.username + '"><div>' + value.username + '<a href="#!" class="secondary-content"><i class="material-icons white-text">videocam</i></a> <a href="#!" class="secondary-content"><i class="material-icons white-text">chat</i></a> <a href="#!" class="secondary-content"><i class="material-icons white-text">phone</i></a></div></li>');
+        $('#userlist').append('<li class="collection-item click-to-call white-text transparent" data-user="' + value.username + '" data-id="' + value._id + '"><div>' + value.username + '<a href="#!" class="secondary-content"><i class="material-icons white-text">videocam</i></a> <a href="#!" class="secondary-content"><i class="material-icons white-text">chat</i></a> <a href="#!" class="secondary-content"><i class="material-icons white-text">phone</i></a></div></li>');
 
     });
 
 });
 
 $(document).on('click','.click-to-call', function () {
-    console.log($(this).attr('data-user'));
+    var id = $(this).attr('data-id');
+    var currentUrl = window.location.origin;
+    var URL = currentUrl + '/page/' + id
+    $.get(URL, function(data){
+    	console.log('success');
+    });
+
+
 });
 $(document).ready(function() {
     $('select').material_select();
