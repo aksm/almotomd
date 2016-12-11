@@ -64,13 +64,15 @@ var accountSid = 'AC5efaf6fcea5c2439ca7a6dbe16416b06';
 router.get('/page/:user', function(req, res){
   // Twilio Credentials
   Account.find({ _id: req.params.user}, function (err, docs) {
+    var caller = loggedUser.firstname + ' ' + loggedUser.lastname + ' from ' + loggedUser.department;
+
     res.json(docs);
     console.log('user info:' + docs);
 
     client.messages.create({
     to: "+18473416432",
     from: "+14122120376",
-    body: docs[0].firstname + " " + docs[0].lastname + " from " + docs[0].department + " says: Please call me.",
+    body: caller +" says: Please call me.",
 
     }, function(err, message) {
       console.log(err);
@@ -162,7 +164,7 @@ router.get('/login', function(req, res) {
 // router.post('/login', passport.authenticate('local'), function(req, res) {
 //   res.redirect('/');
 // });
-
+var loggedUser;
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -182,6 +184,8 @@ router.post('/login', function(req, res, next) {
       if (loginErr) {
         return next(loginErr);
       }
+      loggedUser = user;
+      console.log('logged user: ' + loggedUser.firstname);
       return res.redirect('/');
     });      
   })(req, res, next);
