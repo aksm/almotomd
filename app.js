@@ -43,7 +43,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://admin:AUCTHVSOSUEGHYSM@sl-us-dal-9-portal.0.dblayer.com:16157/admin?ssl=true');
+mongoose.connect('mongodb://localhost/motoMD');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
