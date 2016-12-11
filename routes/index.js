@@ -75,7 +75,7 @@ router.get('/page/:user', function(req, res){
     //   to: "+14129155281",
       to: "+12018758684",
     from: "+14122120376",
-    body: caller +" : You are being paged. https://aqueous-ocean-66422.herokuapp.com",
+    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com",
 
     }, function(err, message) {
       console.log(err);
