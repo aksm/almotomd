@@ -1,5 +1,36 @@
 extends layout
 
 block content
+     .container
 
-        include  templates/room.html
+             .black.darken-4
+                     .container
+                             .input-field.col.s12
+                                     select.white-text
+                                             option(value='', disabled='', selected='') Choose your option
+                                             option(value='1') Surgery
+                                             option(value='2') Cardiology
+                                             option(value='3') Gastroenterology
+                                             option(value='4') Dermatology
+                                     label Select a type of doctor
+                             | e
+                     ul.collection.with-header#userlist
+
+
+                     .container
+                             #remote-media.row
+                             #controls.row
+                                     #preview.col.s6
+                                             #local-media
+                                             button#button-preview.btn.grey.btn-ghost Preview Cam
+                                     .col.s12
+                                             ul#userlist.collection.with-header.m0.hide
+                             #room-controls.row
+
+                                                     input#room-name(type='hidden', value='hackru')
+                                                     button#button-join.btn.btn-large.btn-ghost Start Call
+                                                     button#button-leave.btn.btn-ghost End Call
+                             .row
+                                     #log.hide
+
+//include  templates/room.html
