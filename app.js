@@ -44,6 +44,15 @@ passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
 mongoose.connect(process.env.MONGODB_URI);
+var db = mongoose.connection;
+
+db.on("error", function(error) {
+  console.log("Mongoose Error: ", error);
+});
+
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
