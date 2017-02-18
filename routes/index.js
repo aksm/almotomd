@@ -18,9 +18,14 @@ var router = express.Router();
 router.get('/', function (req, res) {
   // console.log(req.user);
   // console.log(req.session.roomid);
-  // var roomid = req.session.roomid ? req.session.roomid : false;
-  // delete req.session.roomid;
-  res.render('index', { user : req.user });
+  var roomid = req.session.roomid ? req.session.roomid : false;
+  delete req.session.roomid;
+  if(roomid) {
+    res.render('join', { roomid : roomid });
+
+  } else {
+    res.render('index', { user : req.user });
+  }
 });
 
 router.get('/register', function(req, res) {
@@ -92,8 +97,10 @@ router.get('/page/:user', function(req, res){
 
 });
 router.get('/join/:roomid', function(req, res) {
-  var roomid = req.params.roomid;
-  res.render('join', { roomid : roomid });
+  // var roomid = req.params.roomid;
+  // res.render('join', { roomid : roomid });
+  req.session.roomid = req.params.roomid;
+  res.redirect('/');
 });
 
 router.get('/getdoctors/:department', function(req, res) {
