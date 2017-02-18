@@ -2,6 +2,7 @@
 var express = require('express');
 var path = require('path');
 var session = require("express-session");
+var MemoryStore = require("session-memory-store")(session);
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
