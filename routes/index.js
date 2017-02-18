@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
   var roomid = req.session.roomid ? req.session.roomid : false;
   delete req.session.roomid;
   if(roomid) {
-    res.render('join', { roomid : roomid });
+    res.render('room', { roomid : roomid });
 
   } else {
     res.render('index', { user : req.user });
@@ -86,7 +86,7 @@ router.get('/page/:user', function(req, res){
       // to: process.env.GVOICE_NUMBER,
       to: '+1' + docs.phone,
     from: process.env.TWILIO_NUMBER,
-    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com/join/" + loggedUser._id,
+    body: caller +" says: You are being paged. https://glacial-savannah-68565.herokuapp.com/room/" + loggedUser._id,
 
     }, function(err, message) {
       console.log(err);
@@ -96,7 +96,7 @@ router.get('/page/:user', function(req, res){
   
 
 });
-router.get('/join/:roomid', function(req, res) {
+router.get('/room/:roomid', function(req, res) {
   // var roomid = req.params.roomid;
   // res.render('join', { roomid : roomid });
   req.session.roomid = req.params.roomid;
