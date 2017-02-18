@@ -17,7 +17,7 @@ var Account = new Schema({
     // // match: [/.+\@.+\..+/, "Please enter a valid e-mail address"],
    	// },
 
-   	email: String,
+   	username: String,
    	password: String,
 
    // 	password: { 
