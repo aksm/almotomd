@@ -23,6 +23,7 @@
     "passport-local-mongoose": "^4.0.0",
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
+    "session-memory-store": "^0.2.2",
     "twilio": "^2.11.0",
     "twilio-video": "^1.0.0-beta2"
   }
