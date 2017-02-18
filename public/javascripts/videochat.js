@@ -15,8 +15,13 @@ if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
 // When we are about to transition away from this page, disconnect
 // from the room, if joined.
 window.addEventListener('beforeunload', leaveRoomIfJoined);
+if(document.getElementById('room-id')) {
+    var token = '../token';
+} else {
+    token = '/token';
+}
 
-$.getJSON('/token', function (data) {
+$.getJSON(token, function (data) {
     identity = data.identity;
     console.log(identity);
     // Create a Video Client and connect to Twilio
