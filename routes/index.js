@@ -16,6 +16,10 @@ var router = express.Router();
 
 
 router.get('/', function (req, res) {
+  // console.log(req.user);
+  // console.log(req.session.roomid);
+  // var roomid = req.session.roomid ? req.session.roomid : false;
+  // delete req.session.roomid;
   res.render('index', { user : req.user });
 });
 
@@ -64,16 +68,20 @@ var accountSid = process.env.TWILIO_ACCOUNT_SID;
 
 router.get('/page/:user', function(req, res){
   // Twilio Credentials
-  Account.find({ _id: req.params.user}, function (err, docs) {
+  Account.findOne({ _id: req.params.user}, function (err, docs) {
     var caller = loggedUser.firstname + ' ' + loggedUser.lastname + ' from ' + loggedUser.department;
 
     res.json(docs);
-    console.log('user info:' + docs);
+    // console.log('user info:' + docs);
+    console.log(docs);
+    // var phone = docs['phone'];
+    // console.log('phone: ' + phone);
 
     client.messages.create({
-      to: process.env.GVOICE_NUMBER,
+      // to: process.env.GVOICE_NUMBER,
+      to: '+1' + docs.phone,
     from: process.env.TWILIO_NUMBER,
-    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com",
+    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com/room/" + loggedUser._id,
 
     }, function(err, message) {
       console.log(err);
@@ -83,7 +91,10 @@ router.get('/page/:user', function(req, res){
   
 
 });
-
+router.get('/room/:roomid', function(req, res) {
+  var roomid = req.params.roomid;
+  res.render('room', { roomid : roomid });
+});
 
 router.get('/getdoctors/:department', function(req, res) {
 

@@ -21,11 +21,11 @@ $.getJSON('/token', function (data) {
     console.log(identity);
     // Create a Video Client and connect to Twilio
     videoClient = new Twilio.Video.Client(data.token);
-    document.getElementById('room-controls').style.display = 'block';
-
-    // Bind button to join room
-    document.getElementById('button-join').onclick = function () {
-        roomName = document.getElementById('room-name').value;
+    if(document.getElementById('room-controls')) {
+        document.getElementById('room-controls').style.display = 'block';
+    }
+    if(document.getElementById('room-id')) {
+        roomName = document.getElementById('room-id').value;
         if (roomName) {
             log("Joining room '" + roomName + "'...");
 
@@ -36,13 +36,30 @@ $.getJSON('/token', function (data) {
         } else {
             alert('Please enter a room name.');
         }
-    };
+    } else if(document.getElementById('button-join')) {
+        // Bind button to join room
+        document.getElementById('button-join').onclick = function () {
+            roomName = document.getElementById('room-name').value;
+            if (roomName) {
+                log("Joining room '" + roomName + "'...");
+
+                videoClient.connect({ to: roomName}).then(roomJoined,
+                    function(error) {
+                        log('Could not connect to Twilio: ' + error.message);
+                    });
+            } else {
+                alert('Please enter a room name.');
+            }
+        };
+    }
 
     // Bind button to leave room
-    document.getElementById('button-leave').onclick = function () {
-        log('Leaving room...');
-        activeRoom.disconnect();
-    };
+    if(document.getElementById('button-leave')) {
+        document.getElementById('button-leave').onclick = function () {
+            log('Leaving room...');
+            activeRoom.disconnect();
+        };
+    }
 });
 
 // Successfully connected!
@@ -50,7 +67,9 @@ function roomJoined(room) {
     activeRoom = room;
 
     log("Joined as '" + identity + "'");
-    document.getElementById('button-join').style.display = 'none';
+    if(document.getElementById('button-join')) {
+        document.getElementById('button-join').style.display = 'none';
+    }
     document.getElementById('button-leave').style.display = 'inline';
 
     // Draw local video, if not already previewing
@@ -88,22 +107,37 @@ function roomJoined(room) {
         document.getElementById('button-leave').style.display = 'none';
     });
 }
+// if(document.getElementById('room-id')) {
+//     if (!previewMedia) {
+//         previewMedia = new Twilio.Video.LocalMedia();
+//         Twilio.Video.getUserMedia().then(
+//             function (mediaStream) {
+//                 previewMedia.addStream(mediaStream);
+//                 previewMedia.attach('#local-media');
+//             },
+//             function (error) {
+//                 console.error('Unable to access local media', error);
+//                 log('Unable to access Camera and Microphone');
+//             });
+//     }
 
-//  Local video preview
-document.getElementById('button-preview').onclick = function () {
-    if (!previewMedia) {
-        previewMedia = new Twilio.Video.LocalMedia();
-        Twilio.Video.getUserMedia().then(
-            function (mediaStream) {
-                previewMedia.addStream(mediaStream);
-                previewMedia.attach('#local-media');
-            },
-            function (error) {
-                console.error('Unable to access local media', error);
-                log('Unable to access Camera and Microphone');
-            });
-    };
-};
+// } else if(document.getElementById('button-preview')) {
+//     //  Local video preview
+//     document.getElementById('button-preview').onclick = function () {
+//         if (!previewMedia) {
+//             previewMedia = new Twilio.Video.LocalMedia();
+//             Twilio.Video.getUserMedia().then(
+//                 function (mediaStream) {
+//                     previewMedia.addStream(mediaStream);
+//                     previewMedia.attach('#local-media');
+//                 },
+//                 function (error) {
+//                     console.error('Unable to access local media', error);
+//                     log('Unable to access Camera and Microphone');
+//                 });
+//         }
+//     };
+// }
 
 // Activity log
 function log(message) {
