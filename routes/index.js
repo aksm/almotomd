@@ -81,7 +81,7 @@ router.get('/page/:user', function(req, res){
       // to: process.env.GVOICE_NUMBER,
       to: '+1' + docs.phone,
     from: process.env.TWILIO_NUMBER,
-    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com/room/" + loggedUser._id,
+    body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com/join/" + loggedUser._id,
 
     }, function(err, message) {
       console.log(err);
@@ -91,9 +91,9 @@ router.get('/page/:user', function(req, res){
   
 
 });
-router.get('/room/:roomid', function(req, res) {
+router.get('/join/:roomid', function(req, res) {
   var roomid = req.params.roomid;
-  res.render('room', { roomid : roomid });
+  res.render('join', { roomid : roomid });
 });
 
 router.get('/getdoctors/:department', function(req, res) {
