@@ -1,7 +1,7 @@
 // dependencies
 var express = require('express');
-var session = require("express-session");
 var path = require('path');
+var session = require("express-session");
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
