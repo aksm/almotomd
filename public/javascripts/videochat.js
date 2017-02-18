@@ -103,7 +103,10 @@ function roomJoined(room) {
             participant.media.detach();
         });
         activeRoom = null;
-        document.getElementById('button-join').style.display = 'inline';
+        if(document.getElementById('button-join')) {
+            document.getElementById('button-join').style.display = 'inline';
+        }
+
         document.getElementById('button-leave').style.display = 'none';
     });
 }
