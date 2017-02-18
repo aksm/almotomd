@@ -26,6 +26,7 @@ $.getJSON('/token', function (data) {
     }
     if(document.getElementById('room-id')) {
         roomName = document.getElementById('room-id').value;
+        console.log('room name: '+roomName);
         if (roomName) {
             log("Joining room '" + roomName + "'...");
 
