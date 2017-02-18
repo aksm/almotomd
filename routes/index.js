@@ -145,7 +145,7 @@ router.get('/token', function(request, response) {
 });
 
 router.post('/register', function(req, res) {
-  Account.register(new Account({ lastname : req.body.lastname, firstname : req.body.firstname, department : req.body.department, phone:req.body.phone, username:req.body.email }), req.body.password, function(err, account) {
+  Account.register(new Account({ lastname : req.body.lastname, firstname : req.body.firstname, department : req.body.department, phone:req.body.phone, username:req.body.email }), req.body.email, req.body.password, function(err, account) {
     if (err) {
       console.log(err);
       return res.render('register', { account : account });
