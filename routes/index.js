@@ -46,7 +46,7 @@ router.get('/department/:department', function(req, res){
   Account.find({'department': department}, function(err, docs){
     res.json(docs);
   });
-})
+});
 
 router.get('/userlist/:user', function(req, res) {
   // res.render('userlist', { });
@@ -57,8 +57,8 @@ router.get('/userlist/:user', function(req, res) {
 });
 
 
-var accountSid = 'AC5efaf6fcea5c2439ca7a6dbe16416b06';
-  var authToken = 'b692b27b1ae36bdf7c916f57df98259e';
+var accountSid = process.env.TWILIO_ACCOUNT_SID;
+  var authToken = process.env.TWILIO_AUTH_TOKEN;
   //require the Twilio module and create a REST client
   var client = require('twilio')(accountSid, authToken);
 
@@ -71,10 +71,8 @@ router.get('/page/:user', function(req, res){
     console.log('user info:' + docs);
 
     client.messages.create({
-    // to: "+18473416432",
-    //   to: "+14129155281",
-      to: "+12018758684",
-    from: "+14122120376",
+      to: process.env.GVOICE_NUMBER,
+    from: process.env.TWILIO_NUMBER,
     body: caller +" says: You are being paged. https://aqueous-ocean-66422.herokuapp.com",
 
     }, function(err, message) {
@@ -92,26 +90,24 @@ router.get('/getdoctors/:department', function(req, res) {
   // Latitude: 40.7265486
   // Longitude: -74.0074612
   request(
-      { method: 'GET'
-        , uri: 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + req.params.department + '&location=40.7265486%2C-74.0074612%2C10&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=8800c209a89885a1afb0a793713df6cb'
-      }
-      , function (error, response, body) {
+      { method: 'GET',
+        uri: 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + req.params.department + '&location=40.7265486%2C-74.0074612%2C10&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=' + process.env.BETTER_DOCTOR_KEY
+      },
+      function (error, response, body) {
         // body is the decompressed response body
-        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'))
+        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
         console.log('the decoded data is: ' + body);
         var data = JSON.parse(body);
         res.json( data.data );
-      }
-  ).on('data', function(data) {
+      }).on('data', function(data) {
     // decompressed data as it is received
-    console.log('decoded chunk: ' + data)
-  })
-      .on('response', function(response) {
+        console.log('decoded chunk: ' + data);
+      }).on('response', function(response) {
         // unmodified http.IncomingMessage object
         response.on('data', function(data) {
           // compressed data as it is received
-          console.log('received ' + data.length + ' bytes of compressed data')
-        })
+          console.log('received ' + data.length + ' bytes of compressed data');
+        });
       });
 
 });
