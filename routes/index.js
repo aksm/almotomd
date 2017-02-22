@@ -20,11 +20,12 @@ router.get('/', function (req, res) {
   // console.log(req.session.roomid);
   var roomid = req.session.roomid ? req.session.roomid : false;
   delete req.session.roomid;
+  console.log("logged user: " + loggedUser);
   if(roomid) {
     res.render('room', { roomid : roomid });
 
   } else {
-    res.render('index', { user : req.user });
+    res.render('index', { user : loggedUser });
   }
 });
 
@@ -78,10 +79,10 @@ router.get('/page/:user', function(req, res){
 
     res.json(docs);
     // console.log('user info:' + docs);
-    console.log(docs);
+    // console.log(docs);
     // var phone = docs['phone'];
     // console.log('phone: ' + phone);
-
+// console.log(loggedUser);
     client.messages.create({
       // to: process.env.GVOICE_NUMBER,
       to: '+1' + docs.phone,
