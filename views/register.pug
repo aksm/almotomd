@@ -5,18 +5,23 @@ block content
     h1 Register Page
     p.lead Say something worthwhile here.
     br
-    form(role='form', action="/register",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control.white-text(type='text', name="lastname", placeholder='Enter your last name')
-      .form-group
-        input.form-control.white-text(type='text', name="firstname", placeholder='Enter your first name')
-      .form-group
-          input.form-control.white-text(type='password', name="password", placeholder='Enter a password')
-      .form-group
-          input.form-control.white-text(type='text', name="department", placeholder='Enter your department')
-      .form-group
-          input.form-control.white-text(type='text', name="phone", placeholder='Enter your phone number')
-      .form-group
-          input.form-control.white-text(type='text', name="email", placeholder='Enter your email address')
-    button.btn.grey(type='submit') Submit
-     
+    form(method='POST' action='/register' style='max-width: 300px;')
+      div.form-group
+        label(for='lastname') Last Name:
+        input#name.form-control.white-text(type='text', placeholder='Enter your last name' name='lastname')
+      div.form-group
+        label(for='name') First Name:
+        input#name.form-control.white-text(type='text', placeholder='Enter your first name' name='firstname')
+      div.form-group
+        label(for='password') Password:
+        input#name.form-control.white-text(type='password', placeholder='Enter password' name='password')
+      div.form-group
+        label(for='department') Department:
+        input#name.form-control.white-text(type='text', placeholder='Enter your department' name='department')
+      div.form-group
+        label(for='phone') Phone:
+        input#name.form-control.white-text(type='text', placeholder='Enter your phone number' name='phone')
+      div.form-group
+        label(for='email') Email:
+        input#email.form-control.white-text(type='email', placeholder='name@email.com' name='email')
+      button.btn.btn-primary.grey(type='submit') Submit
