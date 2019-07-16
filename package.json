@@ -25,7 +25,7 @@
     "request": "^2.79.0",
     "serve-favicon": "^2.5.0",
     "session-memory-store": "^1.0.0",
-    "twilio": "^4.6.0",
+    "twilio": "^3.33.1",
     "twilio-video": "^1.0.0-beta2"
   }
 }
